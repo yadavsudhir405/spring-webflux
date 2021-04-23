@@ -12,7 +12,6 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 
@@ -52,7 +51,7 @@ public class Dummy {
     @Bean
     public HandlerFunction<ServerResponse> names1Handler() {
         return request -> {
-            final Mono<Integer> integerFlux = this.dummyService.tenToZero().last();
+            final Flux<Integer> integerFlux = this.dummyService.tenToZero();
             return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
                     .body(integerFlux, Integer.class);
         };
